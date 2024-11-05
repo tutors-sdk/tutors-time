@@ -1,3 +1,3 @@
-# tutors-rebuild
+# tutors
 
-first commit of tutors rebuild
+first commit of rebuild of tutors
