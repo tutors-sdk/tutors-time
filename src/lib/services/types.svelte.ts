@@ -1,5 +1,5 @@
 import type { LiveLab } from "./models/live-lab";
-import type { Course, Lo } from "./models/lo-types";
+import type { Course, IconType, Lo } from "./models/lo-types";
 
 export type TutorsId = {
   name: string;
@@ -7,6 +7,16 @@ export type TutorsId = {
   email: string;
   image: string;
   share: boolean;
+};
+
+export type CourseVisit = {
+  id: string;
+  title: string;
+  image?: string;
+  icon?: IconType;
+  lastVisit: Date;
+  credits: string;
+  visits: number;
 };
 
 export interface CourseService {
@@ -22,11 +32,26 @@ export interface CourseService {
   readLo(courseId: string, loId: string, fetchFunction: typeof fetch): Promise<Lo>;
 }
 
+export interface ProfileStore {
+  courseVisits: CourseVisit[];
+
+  reload(): void;
+  save(): void;
+  logCourseVisit(course: Course): void;
+  deleteCourseVisit(courseId: string): void;
+  getCourseVisits(): Promise<CourseVisit[]>;
+}
+
 export interface TutorsConnectService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tutorsId: any;
+  profile: ProfileStore;
 
   connect(redirectStr: string): void;
   reconnect(user: TutorsId): void;
   disconnect(redirectStr: string): void;
+
+  courseVisit(course: Course, user: TutorsId): void;
+  deleteCourseVisit(courseId: string): void;
+  getCourseVisits(): void;
 }
