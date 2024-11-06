@@ -7,6 +7,9 @@
   import TocButton from "./buttons/TocButton.svelte";
   import { currentCourse } from "$lib/runes";
   import LayoutMenu from "../themes/menu/LayoutMenu.svelte";
+  import { tutorsConnectService } from "$lib/services/connect.svelte";
+  import AnonProfile from "./tutors-connect/AnonProfile.svelte";
+  import ConnectedProfile from "./tutors-connect/ConnectedProfile.svelte";
 </script>
 
 <AppBar
@@ -26,6 +29,13 @@
     <span class="divider-vertical hidden h-10 lg:block"></span>
     <LayoutMenu />
     <span class="divider-vertical hidden h-10 lg:block"></span>
+    {#if !tutorsConnectService.tutorsId.value?.login}
+      <AnonProfile redirect="/{currentCourse?.value?.courseId}" />
+    {:else}
+      <div class="relative">
+        <ConnectedProfile />
+      </div>
+    {/if}
     {#if !currentCourse?.value?.isPortfolio}
       <TocButton />
     {/if}
