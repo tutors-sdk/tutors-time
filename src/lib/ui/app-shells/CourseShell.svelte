@@ -6,12 +6,14 @@
   import { fade } from "svelte/transition";
   import type { Snippet } from "svelte";
   import MainNavigator from "../navigators/MainNavigator.svelte";
+  import Sidebars from "../navigators/sidebars/Sidebars.svelte";
 
   type Props = { children: Snippet };
   let { children }: Props = $props();
 </script>
 
 <AppShell class="h-screen">
+  <Sidebars />
   {#snippet header()}
     <MainNavigator />
     <SecondaryNavigator />
