@@ -29,13 +29,13 @@
     <span class="divider-vertical hidden h-10 lg:block"></span>
     <LayoutMenu />
     <span class="divider-vertical hidden h-10 lg:block"></span>
-    {#if !tutorsConnectService.tutorsId.value?.login}
-      <AnonProfile redirect="/{currentCourse?.value?.courseId}" />
-    {:else}
-      <div class="relative">
+    <div class="relative">
+      {#if !tutorsConnectService.tutorsId.value?.login}
+        <AnonProfile redirect="/{currentCourse?.value?.courseId}" />
+      {:else}
         <ConnectedProfile />
-      </div>
-    {/if}
+      {/if}
+    </div>
     {#if !currentCourse?.value?.isPortfolio}
       <TocButton />
     {/if}
