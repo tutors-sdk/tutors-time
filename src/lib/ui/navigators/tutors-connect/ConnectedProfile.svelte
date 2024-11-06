@@ -48,11 +48,10 @@
     </li>
     <hr />
     {#if tutorsConnectService.tutorsId.value?.share}
-      <hr />
       <li>
-        <a href="/next-time/{currentCourse.value?.courseId}}" rel="noreferrer">
-          <Icon icon="fluent:clock-alarm-24-filled" color="rgba(var(--color-primary-500))" height="20" />
-          <div class="ml-2">Tutors Time</div>
+        <a href="https://live.tutors.dev/{currentCourse.value?.courseId}" target="_blank" rel="noreferrer">
+          <Icon icon="fluent:people-list-24-filled" color="rgba(var(--color-primary-500))" height="20" />
+          <div class="ml-2">Tutors Live</div>
         </a>
       </li>
       <hr />
