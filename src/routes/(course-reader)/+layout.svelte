@@ -4,9 +4,15 @@
   import CourseShell from "$lib/ui/app-shells/CourseShell.svelte";
   import type { Snippet } from "svelte";
   import { tutorsConnectService } from "$lib/services/connect.svelte";
+  import { page } from "$app/stores";
 
   type Props = { children: Snippet };
   let { children }: Props = $props();
+
+  page.subscribe((path) => {
+    tutorsConnectService.learningEvent(path.params);
+  });
+  tutorsConnectService.startTimer();
 
   let lastCourseId = "";
   $effect(() => {
