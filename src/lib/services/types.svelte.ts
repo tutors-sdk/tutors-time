@@ -6,7 +6,7 @@ export type TutorsId = {
   login: string;
   email: string;
   image: string;
-  share: boolean;
+  share: string;
 };
 
 export type CourseVisit = {
@@ -18,6 +18,29 @@ export type CourseVisit = {
   credits: string;
   visits: number;
 };
+
+export interface LoUser {
+  fullName: string;
+  avatar: string;
+  id: string;
+}
+
+export class LoRecord {
+  courseId: string = $state("");
+  courseUrl: string = $state("");
+  courseTitle: string = $state("");
+  loRoute: string = $state("");
+  title: string = $state("");
+  img?: string = $state("");
+  icon?: IconType = $state();
+  isPrivate: boolean = $state(false);
+  user?: LoUser = $state<LoUser | undefined>();
+  type: string = $state("");
+
+  constructor(data: any) {
+    Object.assign(this, data);
+  }
+}
 
 export interface CourseService {
   courses: Map<string, Course>;
@@ -51,6 +74,7 @@ export interface TutorsConnectService {
   connect(redirectStr: string): void;
   reconnect(user: TutorsId): void;
   disconnect(redirectStr: string): void;
+  toggleShare(): void;
 
   courseVisit(course: Course, user: TutorsId): void;
   deleteCourseVisit(courseId: string): void;
@@ -68,4 +92,16 @@ export interface AnalyticsService {
   reportPageLoad(course: Course, lo: Lo, student: TutorsId): void;
   updatePageCount(course: Course, lo: Lo, student: TutorsId): void;
   updateLogin(courseId: string, session: any): void;
+}
+
+export interface PresenceService {
+  studentsOnline: any;
+  partyKitAll: any;
+  partyKitCourse: any;
+  studentEventMap: Map<string, LoRecord>;
+  listeningTo: string;
+
+  studentListener(event: any): void;
+  sendLoEvent(course: Course, lo: Lo, student: TutorsId): void;
+  startPresenceListener(courseId: string): void;
 }

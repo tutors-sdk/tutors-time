@@ -9,10 +9,12 @@ import { localStorageProfile } from "./profiles/localStorageProfile";
 import { supabaseProfile } from "./profiles/supabaseProfile.svelte";
 import { currentCourse, currentLo } from "$lib/runes";
 import { analyticsService } from "./analytics.svelte";
+import { presenceService } from "./presence.svelte";
 
 export const tutorsConnectService: TutorsConnectService = {
   tutorsId: rune<TutorsId | null>(null),
   profile: localStorageProfile,
+  intervalId: null,
 
   async connect(redirectStr: string) {
     if (redirectStr === "/") {
@@ -30,6 +32,7 @@ export const tutorsConnectService: TutorsConnectService = {
           localStorage.share = true;
         }
         this.tutorsId.value.share = localStorage.share;
+        console.log("sharing is in connect: " + this.tutorsId.value.share);
         if (localStorage.loginCourse) {
           const courseId = localStorage.loginCourse;
           localStorage.removeItem("loginCourse");
@@ -46,8 +49,19 @@ export const tutorsConnectService: TutorsConnectService = {
     signOut({ callbackUrl: redirectStr });
   },
 
+  toggleShare() {
+    if (this.tutorsId.value && browser) {
+      if (this.tutorsId.value.share === "true") {
+        localStorage.share = this.tutorsId.value.share = "false";
+      } else {
+        localStorage.share = this.tutorsId.value.share = "true";
+      }
+    }
+  },
+
   courseVisit(course: Course, student: TutorsId) {
     this.profile.logCourseVisit(course);
+    presenceService.startPresenceListener(course.courseId);
     if (course.authLevel! > 0 && !this.tutorsId.value?.login) {
       localStorage.loginCourse = course.courseId;
       goto(`/auth`);
@@ -65,6 +79,9 @@ export const tutorsConnectService: TutorsConnectService = {
   learningEvent(params: Record<string, string>): void {
     if (currentCourse.value && currentLo.value && this.tutorsId.value) {
       analyticsService.learningEvent(currentCourse.value, params, currentLo.value, this.tutorsId.value);
+      if (this.tutorsId.value.share === "true") {
+        presenceService.sendLoEvent(currentCourse.value, currentLo.value, this.tutorsId.value);
+      }
     }
   },
 
