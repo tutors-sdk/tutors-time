@@ -46,6 +46,7 @@ export interface TutorsConnectService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tutorsId: any;
   profile: ProfileStore;
+  intervalId: any;
 
   connect(redirectStr: string): void;
   reconnect(user: TutorsId): void;
@@ -54,4 +55,17 @@ export interface TutorsConnectService {
   courseVisit(course: Course, user: TutorsId): void;
   deleteCourseVisit(courseId: string): void;
   getCourseVisits(): void;
+
+  learningEvent(params: Record<string, string>): void;
+  startTimer(): void;
+  stopTimer(): void;
+}
+
+export interface AnalyticsService {
+  loRoute: string;
+
+  learningEvent(course: Course, params: Record<string, unknown>, lo: Lo, student: TutorsId): void;
+  reportPageLoad(course: Course, lo: Lo, student: TutorsId): void;
+  updatePageCount(course: Course, lo: Lo, student: TutorsId): void;
+  updateLogin(courseId: string, session: any): void;
 }
