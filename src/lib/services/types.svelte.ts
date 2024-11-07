@@ -6,7 +6,7 @@ export type TutorsId = {
   login: string;
   email: string;
   image: string;
-  share: boolean;
+  share: string;
 };
 
 export type CourseVisit = {
@@ -74,6 +74,7 @@ export interface TutorsConnectService {
   connect(redirectStr: string): void;
   reconnect(user: TutorsId): void;
   disconnect(redirectStr: string): void;
+  toggleShare(): void;
 
   courseVisit(course: Course, user: TutorsId): void;
   deleteCourseVisit(courseId: string): void;

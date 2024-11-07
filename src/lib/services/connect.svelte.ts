@@ -32,6 +32,7 @@ export const tutorsConnectService: TutorsConnectService = {
           localStorage.share = true;
         }
         this.tutorsId.value.share = localStorage.share;
+        console.log("sharing is in connect: " + this.tutorsId.value.share);
         if (localStorage.loginCourse) {
           const courseId = localStorage.loginCourse;
           localStorage.removeItem("loginCourse");
@@ -46,6 +47,16 @@ export const tutorsConnectService: TutorsConnectService = {
       redirectStr = "/dashboard";
     }
     signOut({ callbackUrl: redirectStr });
+  },
+
+  toggleShare() {
+    if (this.tutorsId.value && browser) {
+      if (this.tutorsId.value.share === "true") {
+        localStorage.share = this.tutorsId.value.share = "false";
+      } else {
+        localStorage.share = this.tutorsId.value.share = "true";
+      }
+    }
   },
 
   courseVisit(course: Course, student: TutorsId) {
@@ -68,7 +79,9 @@ export const tutorsConnectService: TutorsConnectService = {
   learningEvent(params: Record<string, string>): void {
     if (currentCourse.value && currentLo.value && this.tutorsId.value) {
       analyticsService.learningEvent(currentCourse.value, params, currentLo.value, this.tutorsId.value);
-      presenceService.sendLoEvent(currentCourse.value, currentLo.value, this.tutorsId.value);
+      if (this.tutorsId.value.share === "true") {
+        presenceService.sendLoEvent(currentCourse.value, currentLo.value, this.tutorsId.value);
+      }
     }
   },
 
