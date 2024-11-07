@@ -4,6 +4,7 @@
   import { computePosition, autoUpdate, flip, shift, offset, arrow } from "@floating-ui/dom";
   import { initializeStores, storePopup } from "@skeletonlabs/skeleton";
   import type { PageData } from "./$types";
+  import TutorsShell from "$lib/ui/app-shells/TutorsShell.svelte";
 
   interface Props {
     data: PageData;
@@ -14,7 +15,7 @@
   initializeStores();
   storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
-  if (data.user) {
+  if (data?.user) {
     tutorsConnectService.reconnect(data.user);
   }
 </script>
