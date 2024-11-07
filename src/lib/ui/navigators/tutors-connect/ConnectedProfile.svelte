@@ -4,6 +4,7 @@
   import Icon from "@iconify/svelte";
   import { tutorsConnectService } from "$lib/services/connect.svelte";
   import { Avatar } from "@skeletonlabs/skeleton";
+  import { presenceService } from "$lib/services/presence.svelte";
 
   const drawerStore = getDrawerStore();
 
@@ -52,6 +53,17 @@
         <a href="https://live.tutors.dev/{currentCourse.value?.courseId}" target="_blank" rel="noreferrer">
           <Icon icon="fluent:people-list-24-filled" color="rgba(var(--color-primary-500))" height="20" />
           <div class="ml-2">Tutors Live</div>
+        </a>
+      </li>
+      <li>
+        <!-- svelte-ignore a11y-missing-attribute -->
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
+        <a onclick={onLineDrawerOpen}>
+          <Icon icon="fluent:people-list-24-filled" color="rgba(var(--color-primary-500))" height="20" />
+          <div class="ml-2">
+            View <span class="badge bg-error-500 text-white">{presenceService.studentsOnline.value.length}</span> Online
+          </div>
         </a>
       </li>
       <hr />
