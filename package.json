@@ -44,6 +44,7 @@
     "markdown-it-sub": "^2.0.0",
     "markdown-it-sup": "^2.0.0",
     "markdown-it-table-of-contents": "^0.8.0",
+    "partysocket": "^1.0.2",
     "pdfjs-dist": "^4.8.69",
     "prettier": "^3.3.2",
     "prettier-plugin-svelte": "^3.2.6",
