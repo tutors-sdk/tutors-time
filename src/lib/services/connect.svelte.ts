@@ -6,6 +6,7 @@ import type { CourseVisit, TutorsConnectService, TutorsId } from "./types.svelte
 import { goto } from "$app/navigation";
 import type { Course } from "./models/lo-types";
 import { localStorageProfile } from "./profiles/localStorageProfile";
+import { supabaseProfile } from "./profiles/supabaseProfile.svelte";
 
 export const tutorsConnectService: TutorsConnectService = {
   tutorsId: rune<TutorsId | null>(null),
@@ -18,6 +19,7 @@ export const tutorsConnectService: TutorsConnectService = {
   reconnect(user: TutorsId) {
     if (user) {
       this.tutorsId.value = user;
+      this.profile = supabaseProfile;
       if (browser) {
         if (!localStorage.share) {
           localStorage.share = true;
