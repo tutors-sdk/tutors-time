@@ -7,6 +7,8 @@ import { goto } from "$app/navigation";
 import type { Course } from "./models/lo-types";
 import { localStorageProfile } from "./profiles/localStorageProfile";
 import { supabaseProfile } from "./profiles/supabaseProfile.svelte";
+import { currentCourse, currentLo } from "$lib/runes";
+import { analyticsService } from "./analytics.svelte";
 
 export const tutorsConnectService: TutorsConnectService = {
   tutorsId: rune<TutorsId | null>(null),
@@ -58,5 +60,26 @@ export const tutorsConnectService: TutorsConnectService = {
 
   getCourseVisits(): Promise<CourseVisit[]> {
     return this.profile.getCourseVisits();
+  },
+
+  learningEvent(params: Record<string, string>): void {
+    if (currentCourse.value && currentLo.value && this.tutorsId.value) {
+      analyticsService.learningEvent(currentCourse.value, params, currentLo.value, this.tutorsId.value);
+    }
+  },
+
+  startTimer() {
+    this.intervalId = setInterval(() => {
+      if (!document.hidden && currentCourse.value && currentLo.value && this.tutorsId.value) {
+        analyticsService.updatePageCount(currentCourse.value, currentLo.value, this.tutorsId.value);
+      }
+    }, 30 * 1000);
+  },
+
+  stopTimer() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
   }
 };
