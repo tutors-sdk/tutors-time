@@ -80,7 +80,7 @@ export class CalendarChart {
 
     const chart = echarts.init(chartContainer);
     if (!sessionStorage.getItem("logoShown")) {
-      chart.setOption(tutorsAnalyticsLogo("Next Tutors Analytics"));
+      chart.setOption(tutorsAnalyticsLogo("Tutors Analytics"));
       sessionStorage.setItem("logoShown", "true");
       setTimeout(() => {
         const option = calendar(session, callendarMapCollection, bgPatternImg, currentRange);
@@ -176,7 +176,7 @@ export class CalendarChart {
       },
       visualMap: {
         min: 0,
-        max: Math.max(...medianTime.map((item) => item.mediantimeactive)),
+        max: Math.max(...Array.from(medianTime.values())),
         type: "piecewise",
         orient: "horizontal",
         left: "center",
@@ -229,3 +229,7 @@ export class CalendarChart {
     this.medianCalendarRendered = true;
   }
 }
+function getDefaultAvatar(): string {
+  throw new Error("Function not implemented.");
+}
+

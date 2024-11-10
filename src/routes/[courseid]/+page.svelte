@@ -150,7 +150,8 @@
           userNamesAvatars={data.userNamesAvatars}
         />
       {:else}
-        <CalendarView timeActiveMap={data.timeActiveMap} session={data.session} medianTime={data.medianTime} />
+        <CalendarView timeActiveMap={data.timeActiveMap} session={data.session} medianTime={data.medianTime} userAvatarsUseridsMap={data.userAvatarsUseridsMap}
+ />
       {/if}
     {/if}
     {#if instructorMode}
