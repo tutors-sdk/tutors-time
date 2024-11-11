@@ -16,7 +16,7 @@
 
   onMount(() => {
     renderChart();
-  });
+    });
 
   // Destroy the chart instance when the component unmounts
   onDestroy(() => {
@@ -36,7 +36,7 @@
     if (calendarChart) {
       calendarChart.createChartContainer(tutorsConnectService.tutorsId.value.login);
       calendarChart.renderChart(timeActiveMap, session);
-      // calendarChart.renderMedianTimeCalendar(medianTime);
+      calendarChart.renderMedianTimeCalendar(medianTime);
     }
   };
 
@@ -45,8 +45,8 @@
 </script>
 
 <div class="h-screen">
-  {#if session}
-    <div id={`chart-{tutorsConnectService.tutorsId.value.login}`} style="height: 30%;"></div>
+  {#if tutorsConnectService.tutorsId.value.login}
+    <div id={`chart-${tutorsConnectService.tutorsId.value.login}`} style="height: 30%;"></div>
     <div id="median-chart" style="height: 70%;"></div>
   {:else}
     <div id="heatmap-container" style="height: 100%"></div>
