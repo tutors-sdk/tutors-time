@@ -1,36 +1,70 @@
-import { currentTheme } from "$lib/runes";
+import { currentTheme, lightMode } from "$lib/runes";
 import type { IconType } from "$lib/services/models/lo-types";
+
 import { FluentIconLib } from "../icons/fluent-icons";
 import { HeroIconLib } from "../icons/hero-icons";
 
-let StandardIconLib = FluentIconLib;
-export const themes = ["tutors", "dyslexia", "skeleton", "seafoam", "vintage"];
+export const themes = [
+  { name: "tutors", icons: FluentIconLib },
+  { name: "classic", icons: FluentIconLib },
+  { name: "dyslexia", icons: FluentIconLib },
+  { name: "nouveau", icons: FluentIconLib },
+  { name: "concord", icons: FluentIconLib },
+  { name: "nosh", icons: FluentIconLib },
+  { name: "rose", icons: FluentIconLib },
+  { name: "vintage", icons: FluentIconLib },
+  { name: "seafoam", icons: FluentIconLib },
+  { name: "wintry", icons: FluentIconLib },
+  { name: "fennec", iconExists: FluentIconLib },
+  { name: "mona", icons: FluentIconLib },
+  { name: "cerberus", icons: FluentIconLib }
+];
 
-export const themeIcons = {
-  tutors: FluentIconLib,
-  dyslexia: FluentIconLib,
-  skeleton: HeroIconLib,
-  seafoam: FluentIconLib,
-  vintage: HeroIconLib
-};
+export function setDisplayMode(mode: string): void {
+  if (!mode) {
+    mode = "light";
+  }
+  lightMode.value = mode;
+  localStorage.modeCurrent = mode;
+  if (mode === "dark") {
+    document.body.classList.add("dark");
+  } else {
+    document.body.classList.remove("dark");
+  }
+}
 
-export function setIconLibForTheme() {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  StandardIconLib = themeIcons[currentTheme.value];
+export function setTheme(theme: string): void {
+  if (!theme) {
+    theme = "tutors";
+  }
+  if (themes.find((theme) => theme.name === currentTheme.value)) {
+    currentTheme.value = theme;
+  } else {
+    currentTheme.value = "tutors";
+  }
+  document.body.setAttribute("data-theme", currentTheme.value);
+  localStorage.theme = currentTheme.value;
 }
 
 export function getIcon(type: string): IconType {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  return StandardIconLib[type];
+  const iconLib = themes.find((theme) => theme.name === currentTheme.value)?.icons;
+  if (iconLib && iconLib[type]) {
+    return iconLib[type];
+  } else {
+    console.log("No type found for icon", type);
+    return FluentIconLib.tutors;
+  }
 }
 
 export function addIcon(type: string, icon: IconType) {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   FluentIconLib[type] = icon;
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   HeroIconLib[type] = icon;
+}
+
+export function getTypeColour(type: string): string {
+  const iconLib = themes.find((theme) => theme.name === currentTheme.value)?.icons;
+  if (iconLib && iconLib[type]) {
+    return iconLib[type].color;
+  }
+  return "primary";
 }
