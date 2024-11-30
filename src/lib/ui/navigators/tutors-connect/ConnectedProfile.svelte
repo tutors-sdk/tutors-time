@@ -1,60 +1,48 @@
 <script lang="ts">
-  import { popup, type DrawerSettings, getDrawerStore } from "@skeletonlabs/skeleton";
   import { currentCourse } from "$lib/runes";
-  import Icon from "@iconify/svelte";
   import { tutorsConnectService } from "$lib/services/connect.svelte";
-  import { Avatar } from "@skeletonlabs/skeleton";
-
-  const drawerStore = getDrawerStore();
-
+  import MenuItem from "../../utils/MenuItem.svelte";
+  import Icon from "$lib/ui/themes/icons/Icon.svelte";
+  import Menu from "$lib/ui/utils/Menu.svelte";
+  import { Avatar } from "@skeletonlabs/skeleton-svelte";
   function logout() {
     tutorsConnectService.disconnect("/");
   }
 </script>
 
-<button use:popup={{ event: "click", target: "avatar" }}>
-  <div class="btn btn-sm space-x-1">
-    <div class="relative inline-block">
+{#snippet menuSelector()}
+  <div class="relative">
+    <div class="mt-2 flex items-center">
       <Avatar
-        width="w-10"
+        classes="size-9"
         src={tutorsConnectService.tutorsId.value?.image}
-        alt={tutorsConnectService.tutorsId.value?.name}
+        name={tutorsConnectService.tutorsId.value?.name}
       />
     </div>
   </div>
-</button>
+{/snippet}
 
-<nav class="card-body card list-nav w-56 space-y-4 p-4 shadow-lg" data-popup="avatar">
-  <span class="ml-4 mt-2 text-xs">Logged in as:</span><br />
-  <span class="ml-4 text-sm">{tutorsConnectService.tutorsId.value?.name}</span>
-  <ul>
-    <li>
-      <a href="/dashboard">
-        <Icon icon="fluent:home-24-filled" color="rgba(var(--color-primary-500))" height="20" />
-        <div class="ml-2">Dashboard</div>
-      </a>
-    </li>
+{#snippet menuContent()}
+  <ul class="space-y-3">
+    <MenuItem link="/" text="Home" type="tutors" />
     <hr />
-
-    <li>
-      <a href="https://live.tutors.dev/{currentCourse.value?.courseId}" target="_blank" rel="noreferrer">
-        <Icon icon="fluent:people-list-24-filled" color="rgba(var(--color-primary-500))" height="20" />
-        <div class="ml-2">Tutors Live</div>
-      </a>
-    </li>
-    <hr />
-
-    <li>
-      <a href="https://github.com/{tutorsConnectService.tutorsId.value?.login}" target="_blank" rel="noreferrer">
-        <Icon icon="mdi:github" height="20" />
-        <div class="ml-2">Github Profile</div>
-      </a>
-    </li>
-    <li>
-      <button onclick={logout} class="w-full">
-        <Icon icon="fluent:sign-out-24-filled" color="rgba(var(--color-error-500))" height="20" />
-        <div class="ml-2">Disconnect</div>
-      </button>
-    </li>
+    {#if tutorsConnectService.tutorsId.value?.share === "true"}
+      <MenuItem
+        link="https://live.tutors.dev/course/{currentCourse.value?.courseId}"
+        text="Tutors Live"
+        type="live"
+        targetStr="_blank"
+      />
+      <hr />
+    {/if}
+    <MenuItem
+      link="https://github.com/{tutorsConnectService.tutorsId.value?.login}"
+      text="Github Profile"
+      type="github"
+      targetStr="_blank"
+    />
+    <MenuItem text="Disconnect" type="logout" onClick={logout} />
   </ul>
-</nav>
+{/snippet}
+
+<Menu {menuSelector} {menuContent} />

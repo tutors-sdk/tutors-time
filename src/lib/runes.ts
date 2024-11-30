@@ -9,3 +9,4 @@ export const currentCourse = rune<Course | null>(null);
 export const courseUrl = rune("");
 export const currentLabStepIndex = rune(0);
 export const currentTheme = rune("tutors");
+export const lightMode = rune("light");
