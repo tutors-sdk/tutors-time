@@ -117,7 +117,7 @@ export class CalendarChart {
       calendarMap,
       bgPatternImg,
       currentRange,
-      avatarurl ?? getDefaultAvatar(),
+      avatarurl ?? "",
       fullname ?? userId
     );
 
@@ -229,7 +229,3 @@ export class CalendarChart {
     this.medianCalendarRendered = true;
   }
 }
-function getDefaultAvatar(): string {
-  throw new Error("Function not implemented.");
-}
-
