@@ -54,7 +54,7 @@
   ? course.wallMap?.get("lab")?.length || 0 
   : Array.from(course.topicIndex.values()).filter(topic => !topic.hide).length;  
   
-  let innerDivWidth = numOfCategories * 15; // The width for the inner div
+  let innerDivWidth = numOfCategories * 20; // The width for the inner div
   let innerDivHeight = userIds.length * 45; // The height based on user count
 </script>
 
