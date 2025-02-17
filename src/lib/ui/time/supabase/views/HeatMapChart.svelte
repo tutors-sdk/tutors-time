@@ -50,11 +50,12 @@
     }
   });
 
-  numOfCategories = chartType === "LabHeatMap" 
-  ? course.wallMap?.get("lab")?.length || 0 
-  : Array.from(course.topicIndex.values()).filter(topic => !topic.hide).length;  
-  
-  let innerDivWidth = numOfCategories * 15; // The width for the inner div
+  numOfCategories =
+    chartType === "LabHeatMap"
+      ? course.wallMap?.get("lab")?.length || 0
+      : Array.from(course.topicIndex.values()).filter((topic) => !topic.hide).length;
+
+  let innerDivWidth = numOfCategories * 20; // The width for the inner div
   let innerDivHeight = userIds.length * 45; // The height based on user count
 </script>
 
@@ -81,7 +82,7 @@
     height: 100%; /* Adjust this value based on the height you want */
     max-width: 100%; /* Full width */
     overflow: auto; /* Enable both vertical and horizontal scrolling */
-    border: 1px solid #ccc; 
+    border: 1px solid #ccc;
     padding: 10px;
   }
 
@@ -101,7 +102,6 @@
     height: 75%; /* 75% of the inner-content height */
     width: 100%; /* Full width of the inner-content */
     min-height: 75vh; /* Set a minimum height */
-
   }
 
   .combined-heatmap {
@@ -114,7 +114,7 @@
   .large-container {
     height: 100vh; /* Full viewport height */
     width: 100%; /* Full width */
-    border: 1px solid #ccc; 
+    border: 1px solid #ccc;
     padding: 1px;
   }
 
