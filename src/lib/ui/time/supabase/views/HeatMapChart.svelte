@@ -111,7 +111,7 @@
   .large-container {
     height: 100vh; /* Full viewport height */
     width: 100%; /* Full width */
-    border: 1px solid #ccc; 
+    border: 1px solid #ccc;
     padding: 1px;
   }
 
