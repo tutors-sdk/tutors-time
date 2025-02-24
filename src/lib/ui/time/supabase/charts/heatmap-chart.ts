@@ -39,7 +39,7 @@ export function heatmap(
         bottom: "4%",
         top: extraTopMargin, // Adjust dynamically for smaller category counts
         width: `${dynamicWidthPercentage}%`,
-        height: `${gridHeight}` // Let height adjust based on the content
+        height: `${gridHeight}px` // Let height adjust based on the content
       };
     } else {
       gridConfig = {
@@ -48,7 +48,7 @@ export function heatmap(
         containLabel: true,
         top: "20%",
         bottom: "4%",
-        height: "30%", // Fixed height
+        height: "20%", // Fixed height
         width: `${dynamicWidthPercentage}%`
       };
     }
