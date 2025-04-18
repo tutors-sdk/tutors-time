@@ -38,7 +38,7 @@ export function heatmap(
         containLabel: true,
         bottom: "4%",
         top: extraTopMargin, // Adjust dynamically for smaller category counts
-        width: `1000px`,
+        width: `${dynamicWidthPercentage}%`,
         height: `${gridHeight}px` // Let height adjust based on the content
       };
     } else {
