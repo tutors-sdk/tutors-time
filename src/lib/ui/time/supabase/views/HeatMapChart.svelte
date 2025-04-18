@@ -50,19 +50,20 @@
     }
   });
 
-  numOfCategories = chartType === "LabHeatMap" 
-  ? course.wallMap?.get("lab")?.length || 0 
-  : Array.from(course.topicIndex.values()).filter(topic => !topic.hide).length;  
-  
-  let innerDivWidth = numOfCategories * 50; // The width for the inner div
-  let innerDivHeight = userIds.length * 40; // The height based on user count
+  numOfCategories =
+    chartType === "LabHeatMap"
+      ? course.wallMap?.get("lab")?.length || 0
+      : Array.from(course.topicIndex.values()).filter((topic) => !topic.hide).length;
+
+  let innerDivWidth = numOfCategories * 30; // The width for the inner div
+  let innerDivHeight = userIds.length * 30; // The height based on user count
 </script>
 
 <!-- Scrollable container -->
 {#if multipleUsers}
   <div class="scrollable-container">
     <!-- Inner content that exceeds the height of the scrollable container -->
-    <div class="inner-content" style="height: {innerDivHeight}px; width: {innerDivWidth}%;">
+    <div class="inner-content" style="height: {innerDivHeight}px; width: {innerDivWidth}px;">
       <!-- Heatmap containers -->
       <div id="heatmap-container" class="heatmap"></div>
       <div id="combined-heatmap" class="combined-heatmap"></div>
@@ -81,7 +82,7 @@
     height: 100%; /* Adjust this value based on the height you want */
     max-width: 100%; /* Full width */
     overflow: auto; /* Enable both vertical and horizontal scrolling */
-    border: 1px solid #ccc; 
+    border: 1px solid #ccc;
     padding: 0;
   }
 

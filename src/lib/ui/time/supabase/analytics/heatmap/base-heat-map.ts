@@ -63,6 +63,11 @@ export class BaseHeatMapChart<T> {
 
   getChartContainer() {
     const container = document.getElementById("heatmap-container");
+    if (container) {
+      const existing = echarts.getInstanceByDom(container);
+      if (existing) echarts.dispose(container);
+      this.chartInstance = echarts.init(container);
+    }
     return container;
   }
 
@@ -204,11 +209,10 @@ export class BaseHeatMapChart<T> {
   }
 
   renderChart(container: HTMLElement, title: string) {
-    this.chartInstance = echarts.init(container);
     const option: HeatMapChartConfig = heatmap(this.categories, this.yAxisData, this.series, bgPatternImg, title);
-    this.chartInstance.setOption(option);
+    this.chartInstance?.setOption(option, true);
     this.sortGithubLabels();
-    this.chartInstance.resize();
+    this.chartInstance?.resize();
   }
 
   prepareCombinedTopicData(allTypes: Lo[], userIds: string[], getTitle: (lo: Lo) => string | undefined) {
@@ -292,7 +296,6 @@ export class BaseHeatMapChart<T> {
           const colIndex = params.value[0]; // Column index of the clicked cell
           // Extract the data for the clicked column
           let columnData = this.series.data.filter((item: any[]) => item[0] === colIndex);
-          // Sort the column data by the value (timeActive) in ascending order
           columnData.sort((a: number[], b: number[]) => a[2] - b[2]);
           // Reorder yAxisData based on sorted column data
           const sortedUserIndices = columnData.map((item: any[]) => item[1]);
@@ -308,7 +311,16 @@ export class BaseHeatMapChart<T> {
           // Refresh the chart instance
           this.chartInstance?.setOption({
             yAxis: {
-              data: this.yAxisData
+              type: "category",
+              data: this.yAxisData,
+              axisLabel: {
+                fontFamily: "monospace",
+                width: 140,
+                overflow: "truncate"
+              }
+            },
+            grid: {
+              left: 160 // match or slightly exceed yAxis width to align properly
             },
             series: [
               {
