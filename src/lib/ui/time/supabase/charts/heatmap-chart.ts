@@ -33,8 +33,8 @@ export function heatmap(
   if (series?.data) {
     if (series.name === "student engagement for lab" || series.name === "student engagement for topic") {
       gridConfig = {
-        left: "6%",
-        right: gridWidth,
+        left: "150px",
+        right: "150px",
         containLabel: true,
         bottom: "4%",
         top: extraTopMargin, // Adjust dynamically for smaller category counts
@@ -94,13 +94,13 @@ export function heatmap(
       yAxis: {
         type: "category",
         data: yAxisData.length ? yAxisData : [],
-        triggerEvent: true, // Enable event triggering on yAxis labels
-        splitArea: { show: true },
         axisLabel: {
-          interval: 0,
-          fontSize: 15,
-          padding: [10, 0, 10, 0],
-          margin: 10
+          fontFamily: "monospace",
+          width: 140,
+          overflow: "truncate"
+        },
+        grid: {
+          left: 160 // match or slightly exceed yAxis width to align properly
         }
       },
       visualMap: {
