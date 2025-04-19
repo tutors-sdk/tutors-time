@@ -55,15 +55,15 @@
       ? course.wallMap?.get("lab")?.length || 0
       : Array.from(course.topicIndex.values()).filter((topic) => !topic.hide).length;
 
-  let innerDivWidth = numOfCategories * 20; // The width for the inner div
-  let innerDivHeight = userIds.length * 45; // The height based on user count
+  let innerDivWidth = numOfCategories * 30; // The width for the inner div
+  let innerDivHeight = userIds.length * 30; // The height based on user count
 </script>
 
 <!-- Scrollable container -->
 {#if multipleUsers}
   <div class="scrollable-container">
     <!-- Inner content that exceeds the height of the scrollable container -->
-    <div class="inner-content" style="height: {innerDivHeight}px; width: {innerDivWidth}%;">
+    <div class="inner-content" style="height: {innerDivHeight}px; width: {innerDivWidth}px;">
       <!-- Heatmap containers -->
       <div id="heatmap-container" class="heatmap"></div>
       <div id="combined-heatmap" class="combined-heatmap"></div>
@@ -83,7 +83,7 @@
     max-width: 100%; /* Full width */
     overflow: auto; /* Enable both vertical and horizontal scrolling */
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 0;
   }
 
   /* Inner content that may overflow the outer container */
@@ -101,13 +101,11 @@
   .heatmap {
     height: 75%; /* 75% of the inner-content height */
     width: 100%; /* Full width of the inner-content */
-    min-height: 75vh; /* Set a minimum height */
   }
 
   .combined-heatmap {
     height: 25%; /* 25% of the inner-content height */
     width: 100%; /* Full width of the inner-content */
-    min-height: 25vh; /* Set a minimum height */
   }
 
   /* Single-user view container */
