@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from "svelte";
   import { LabHeatMapChart } from "../analytics/heatmap/lab-heat-map-chart";
   import { TopicHeatMapChart } from "../analytics/heatmap/topic-heat-map-chart";
-  import type { Course } from "$lib/services/models/lo-types";
+  import type { Course } from "@tutors/tutors-model-lib";
   import type { Session } from "@supabase/supabase-js";
 
   export let course: Course;

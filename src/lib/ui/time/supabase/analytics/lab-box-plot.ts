@@ -5,8 +5,8 @@ import { BoxplotChart } from "echarts/charts";
 import { CanvasRenderer } from "echarts/renderers";
 import { backgroundPattern } from "../charts/tutors-charts-background-url";
 import { boxplot, combinedBoxplotChart } from "../charts/boxplot-chart";
-import type { Course } from "$lib/services/models/lo-types";
-import { filterByType } from "$lib/services/models/lo-utils";
+import type { Course } from "@tutors/tutors-model-lib";
+import { filterByType } from "@tutors/tutors-model-lib";
 import type { BoxplotChartConfig, BoxplotData } from "$lib/services/metrics/metrics-types";
 
 echarts.use([TitleComponent, TooltipComponent, GridComponent, BoxplotChart, CanvasRenderer]);

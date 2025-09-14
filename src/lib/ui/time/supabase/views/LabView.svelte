@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Course } from "$lib/services/models/lo-types";
+  import type { Course } from "@tutors/tutors-model-lib";
   import LabHeatMapChart from "./HeatMapChart.svelte";
   import type { Session } from "@supabase/supabase-js";
 

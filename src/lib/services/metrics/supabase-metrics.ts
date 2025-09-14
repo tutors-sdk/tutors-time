@@ -1,5 +1,5 @@
 import { db } from "$lib/services/metrics/db/client";
-import type { Course, LearningRecord } from "../models/lo-types";
+import type { Course, LearningRecord } from "@tutors/tutors-model-lib";
 import type { LearningInteraction } from "./metrics-types";
 import { formatDate } from "./supabase-utils";
 

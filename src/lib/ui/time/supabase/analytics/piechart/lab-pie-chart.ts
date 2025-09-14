@@ -3,14 +3,14 @@ import { TooltipComponent, LegendComponent, GridComponent } from "echarts/compon
 import { CanvasRenderer } from "echarts/renderers";
 import { PieChart, BarChart } from "echarts/charts";
 import { LabelLayout } from "echarts/features";
-import type { Course } from "$lib/services/models/lo-types";
+import type { Course } from "@tutors/tutors-model-lib";
 import { backgroundPattern, textureBackground } from "../../charts/tutors-charts-background-url";
 import type { Session } from "@supabase/supabase-js";
-import { filterByType } from "$lib/services/models/lo-utils";
+import { filterByType } from "@tutors/tutors-model-lib";
 import { piechart } from "../../charts/piechart";
 import { BasePieChart } from "./base-pie-chart";
 import type { DrilledDownData } from "$lib/services/metrics/metrics-types";
-import { tutorsConnectService } from "$lib/services/connect.svelte";
+import { tutorsConnectService } from "$lib/services/connect";
 echarts.use([TooltipComponent, LegendComponent, PieChart, BarChart, GridComponent, CanvasRenderer, LabelLayout]);
 
 const bgTexture = textureBackground;

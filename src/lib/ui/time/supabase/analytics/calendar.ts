@@ -9,7 +9,7 @@ import { GraphicComponent } from "echarts/components";
 import { tutorsAnalyticsLogo } from "../charts/personlised-logo";
 import type { Session } from "@supabase/supabase-js";
 import type { CalendarMap } from "$lib/services/metrics/metrics-types";
-import { tutorsConnectService } from "$lib/services/connect.svelte";
+import { tutorsConnectService } from "$lib/services/connect";
 
 echarts.use([
   TitleComponent,

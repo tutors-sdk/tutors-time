@@ -196,15 +196,3 @@
   </div>
 </div>
 
-<style>
-  .active {
-    @apply bg-gray-200 font-bold;
-  }
-
-  /* Sticky Sidebar */
-  .sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-  }
-</style>

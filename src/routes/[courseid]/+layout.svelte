@@ -1,6 +1,6 @@
 <script lang="ts">
+  import "../../app.css";
   import TutorsShell from "$lib/ui/TutorsShell.svelte";
-  import "../../app.postcss";
   import type { PageData } from "./$types";
   interface Props {
     data: PageData;
