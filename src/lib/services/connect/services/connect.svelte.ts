@@ -17,10 +17,6 @@ export const tutorsConnectService: TutorsConnectService = {
     if (user) {
       this.tutorsId.value = user;
       if (browser) {
-        if (!localStorage.share) {
-          localStorage.share = true;
-        }
-        this.tutorsId.value.share = localStorage.share;
         if (localStorage.loginCourse) {
           const courseId = localStorage.loginCourse;
           localStorage.removeItem("loginCourse");
@@ -34,4 +30,3 @@ export const tutorsConnectService: TutorsConnectService = {
     signOut({ callbackUrl: redirectStr });
   }
 };
-
