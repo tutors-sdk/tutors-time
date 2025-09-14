@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from "svelte";
   import { CalendarChart } from "../analytics/calendar";
   import type { Session } from "@supabase/supabase-js";
-  import { tutorsConnectService } from "$lib/services/connect.svelte";
+  import { tutorsConnectService } from "$lib/services/connect";
 
   export let timeActiveMap: Map<string, Map<string, number>>;
   export let session: Session;

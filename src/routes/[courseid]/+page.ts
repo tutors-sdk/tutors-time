@@ -1,23 +1,24 @@
 import type { PageLoad } from "./$types";
-import type { Course } from "$lib/services/models/lo-types";
+import type { Course } from "@tutors/tutors-model-lib";
 import {
   aggregateTimeActiveByDate,
   decorateLearningRecords,
   fetchLearningUserInteractions
 } from "$lib/services/metrics/supabase-metrics";
 
+
 import { getCalendarDataForAll, getMedianTimeActivePerDate } from "$lib/services/metrics/supabase-utils";
-import { courseService } from "$lib/services/course.svelte";
+import { courseService } from "$lib/services/course";
 import type { LearningInteraction } from "$lib/services/metrics/metrics-types";
 import { goto } from "$app/navigation";
-import { tutorsConnectService } from "$lib/services/connect.svelte";
+import { tutorsConnectService } from "$lib/services/connect";
 
 export const ssr = false;
 
 export const load: PageLoad = async ({ params, fetch }) => {
   const course: Course = await courseService.readCourse(params.courseid, fetch);
 
-  if (!tutorsConnectService.tutorsId.value) {
+  if (!tutorsConnectService.tutorsId?.value) {
     localStorage.loginCourse = course.courseId;
     goto(`/auth`);
   }

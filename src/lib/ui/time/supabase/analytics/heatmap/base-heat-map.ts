@@ -3,11 +3,11 @@ import { TooltipComponent, GridComponent, VisualMapComponent } from "echarts/com
 import { HeatmapChart } from "echarts/charts";
 import { CanvasRenderer } from "echarts/renderers";
 import { backgroundPattern } from "../../charts/tutors-charts-background-url";
-import type { Course, Lo } from "$lib/services/models/lo-types";
+import type { Course, Lo } from "@tutors/tutors-model-lib";
 import type { Session } from "@supabase/supabase-js";
 import { heatmap, renderCombinedChart } from "../../charts/heatmap-chart";
 import type { HeatMapChartConfig, HeatMapSeriesData } from "$lib/services/metrics/metrics-types";
-import { tutorsConnectService } from "$lib/services/connect.svelte";
+import { tutorsConnectService } from "$lib/services/connect";
 
 echarts.use([TooltipComponent, GridComponent, VisualMapComponent, HeatmapChart, CanvasRenderer]);
 

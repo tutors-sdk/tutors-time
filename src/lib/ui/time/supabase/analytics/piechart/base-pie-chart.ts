@@ -3,7 +3,7 @@ import { TooltipComponent, LegendComponent, GridComponent } from "echarts/compon
 import { CanvasRenderer } from "echarts/renderers";
 import { PieChart, BarChart } from "echarts/charts";
 import { LabelLayout } from "echarts/features";
-import type { Course, Lo } from "$lib/services/models/lo-types";
+import type { Course, Lo } from "@tutors/tutors-model-lib";
 import { backgroundPattern, textureBackground } from "../../charts/tutors-charts-background-url";
 import type { Session } from "@supabase/supabase-js";
 import type { DrilledDownData } from "$lib/services/metrics/metrics-types";
