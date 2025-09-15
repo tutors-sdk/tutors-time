@@ -1,7 +1,7 @@
 import { db } from "$lib/services/metrics/db/client";
-import type { Course, Lo } from "../models/lo-types";
-import { filterByType } from "../models/lo-utils";
-import type { TutorsId } from "../types.svelte";
+import type { Course, Lo } from "@tutors/tutors-model-lib";
+import { filterByType } from "@tutors/tutors-model-lib";
+import type { TutorsId } from "$lib/services/connect";
 import type { LearningInteraction } from "./metrics-types";
 
 export async function getNumOfLearningRecordsIncrements(

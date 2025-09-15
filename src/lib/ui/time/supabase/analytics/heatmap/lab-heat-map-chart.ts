@@ -1,6 +1,6 @@
 import { BaseHeatMapChart } from "./base-heat-map";
-import { filterByType } from "$lib/services/models/lo-utils";
-import type { Lo } from "$lib/services/models/lo-types";
+import { filterByType } from "@tutors/tutors-model-lib";
+import type { Lo } from "@tutors/tutors-model-lib";
 import type { Session } from "@supabase/supabase-js";
 
 export class LabHeatMapChart extends BaseHeatMapChart<number> {

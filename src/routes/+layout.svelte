@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { tutorsConnectService } from "$lib/services/connect.svelte";
-  import "../app.postcss";
-
+  import "../app.css";
+  import { tutorsConnectService } from "$lib/services/connect";
   import type { PageData } from "./$types";
+  import { browser } from "$app/environment";
+  import { themeService } from "$lib/services/themes/services/themes.svelte";
 
   interface Props {
     data: PageData;
@@ -12,6 +13,10 @@
 
   if (data?.user) {
     tutorsConnectService.reconnect(data.user);
+  }
+
+  if (browser) {
+    themeService.initDisplay();
   }
 </script>
 

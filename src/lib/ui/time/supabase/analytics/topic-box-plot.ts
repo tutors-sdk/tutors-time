@@ -4,7 +4,7 @@ import { BoxplotChart } from "echarts/charts";
 import { CanvasRenderer } from "echarts/renderers";
 import { backgroundPattern } from "../charts/tutors-charts-background-url";
 import { boxplot, combinedBoxplotChart } from "../charts/boxplot-chart";
-import type { Course, Lo } from "$lib/services/models/lo-types";
+import type { Course, Lo } from "@tutors/tutors-model-lib";
 import { getCompositeValues, getSimpleTypesValues } from "$lib/services/metrics/supabase-utils";
 import * as d3 from "d3";
 import type { BoxplotData } from "$lib/services/metrics/metrics-types";

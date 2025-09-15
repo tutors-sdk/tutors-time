@@ -1,12 +1,10 @@
 <script lang="ts">
   import { AppBar } from "@skeletonlabs/skeleton-svelte";
   import CourseTitle from "./titles/CourseTitle.svelte";
-  import { currentCourse } from "$lib/runes";
-  import LayoutMenu from "../themes/LayoutMenu.svelte";
-  import { tutorsConnectService } from "$lib/services/connect.svelte";
   import AnonProfile from "./tutors-connect/AnonProfile.svelte";
-  import ConnectedProfile from "./tutors-connect/ConnectedProfile.svelte";
   import TutorsTitle from "./titles/TutorsTitle.svelte";
+  import { currentCourse } from "$lib/runes.svelte";
+    import { tutorsConnectService } from "$lib/services/connect";
 </script>
 
 <AppBar
@@ -27,16 +25,18 @@
   {/snippet}
   {#snippet trail()}
     <span class="mx-2 h-10 w-[1px] bg-gray-400 dark:bg-gray-200"></span>
-    <LayoutMenu />
-    <span class="mx-2 h-10 w-[1px] bg-gray-400 dark:bg-gray-200"></span>
     {#if !currentCourse?.value?.isPrivate}
       <div class="relative">
-        {#if !tutorsConnectService.tutorsId.value?.login}
+        {#if !tutorsConnectService.tutorsId?.value?.login}
           <AnonProfile redirect="/{currentCourse?.value?.courseId}" />
         {:else}
-          <ConnectedProfile />
+          <div class="mt-2 flex items-center">
+            <img class="w-12 rounded-full" src={tutorsConnectService.tutorsId?.value?.image} alt={tutorsConnectService.tutorsId?.value?.name} />
+          </div>
         {/if}
       </div>
     {/if}
+    <span class="hidden md:block">
+    </span>
   {/snippet}
 </AppBar>

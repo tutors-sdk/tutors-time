@@ -1,6 +1,6 @@
 import { BaseHeatMapChart } from "./base-heat-map";
 import { getCompositeValues, getSimpleTypesValues } from "$lib/services/metrics/supabase-utils";
-import type { Course, Lo } from "$lib/services/models/lo-types";
+import type { Course, Lo } from "@tutors/tutors-model-lib";
 import type { Session } from "@supabase/supabase-js";
 
 export class TopicHeatMapChart extends BaseHeatMapChart<number> {

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
-  import type { Course } from "$lib/services/models/lo-types";
+  import type { Course } from "@tutors/tutors-model-lib";
   import { LabPieChart } from "../analytics/piechart/lab-pie-chart";
   import { TopicPieChart } from "../analytics/piechart/topic-pie-chart";
   import type { Session } from "@supabase/supabase-js";
