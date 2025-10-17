@@ -20,3 +20,4 @@ export const animationDelay = rune(200);
 export const currentLo = rune<Lo | null>(null);
 export const currentCourse = rune<Course | null>(null);
 
+export const tutorsId = rune<TutorsId | null>(null);
