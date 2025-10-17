@@ -6,6 +6,8 @@
 import { type Lo, type Course, type Lab, type Note, decorateCourseTree } from "@tutors/tutors-model-lib";
 
 import { LiveLab } from "./live-lab";
+
+import { markdownService } from "$lib/services/markdown";
 import { currentCourse, currentLo, rune } from "$lib/runes.svelte";
 import type { CourseService, LabService } from "../types";
 
@@ -159,5 +161,13 @@ export const courseService: CourseService = {
    * Refreshes all cached labs and notes, forcing markdown to HTML reconversion
    */
   refreshAllLabs() {
+    for (const liveLab of this.labs.values()) {
+      markdownService.convertLabToHtml(liveLab.course, liveLab.lab, true);
+      liveLab.convertMdToHtml();
+      liveLab.refreshStep();
+    }
+    for (const note of this.notes.values()) {
+      markdownService.convertNoteToHtml(currentCourse.value!, note, true);
+    }
   }
 };
