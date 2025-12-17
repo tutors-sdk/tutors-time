@@ -1,16 +1,12 @@
 import type { GridConfig, HeatMapChartConfig, HeatMapSeriesData } from "$lib/services/metrics/metrics-types";
 
-export function heatmap(
-  categories: Set<string>,
-  yAxisData: string[],
-  series: HeatMapSeriesData,
-  bgPatternImg: HTMLImageElement,
-  chartTitleString: string
-): HeatMapChartConfig {
+export function heatmap(categories: Set<string>, yAxisData: string[], series: HeatMapSeriesData, bgPatternImg: HTMLImageElement, chartTitleString: string): HeatMapChartConfig {
   const numCategories = categories.size;
   const numRows = yAxisData.length;
 
-  const cellSize = numRows <= 5 ? 100 : 20;
+  // Controls the approximate pixel size of each heatmap cell (both width and height).
+  // Increase these values to make cells taller/larger.
+  const cellSize = numRows <= 5 ? 120 : 30;
   const minWidthPercentage = 10; // Minimum width percentage for small number of categories
   const maxWidthPercentage = 100; // Maximum width percentage for large number of categories
   const widthPerCategory = numCategories < 10 ? 5 : 2;
@@ -76,12 +72,13 @@ export function heatmap(
         splitArea: { show: true },
         axisLabel: {
           interval: 0,
-          fontSize: 13,
+          fontSize: 12,
           rotate: 90,
           align: "right",
           verticalAlign: "middle",
           padding: [extraLabelPadding, 0, extraLabelPadding, 0], // Adjust padding for better visibility
-          formatter: (value: string) => (value.length > 20 ? value.slice(0, 20) + "..." : value)
+          // Show full labels (no manual truncation); any remaining clipping is handled by ECharts layout
+          formatter: (value: string) => value
         },
         axisTick: {
           alignWithLabel: true

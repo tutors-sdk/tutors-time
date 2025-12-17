@@ -50,10 +50,7 @@
     }
   });
 
-  numOfCategories =
-    chartType === "LabHeatMap"
-      ? course.wallMap?.get("lab")?.length || 0
-      : Array.from(course.topicIndex.values()).filter((topic) => !topic.hide).length;
+  numOfCategories = chartType === "LabHeatMap" ? course.wallMap?.get("lab")?.length || 0 : Array.from(course.topicIndex.values()).filter((topic) => !topic.hide).length;
 
   let innerDivWidth = numOfCategories * 30; // The width for the inner div
   let innerDivHeight = userIds.length * 30; // The height based on user count
@@ -79,7 +76,7 @@
 <style>
   /* Outer scrollable container */
   .scrollable-container {
-    height: 100%; /* Adjust this value based on the height you want */
+    height: 100vh; /* Full viewport height */
     max-width: 100%; /* Full width */
     overflow: auto; /* Enable both vertical and horizontal scrolling */
     border: 1px solid #ccc;
@@ -95,6 +92,7 @@
     width: auto;
     height: auto;
     min-width: 100vw; /* Set a minimum width */
+    min-height: 100vh; /* Ensure content is at least full viewport height */
   }
 
   /* Individual heatmap styling */
