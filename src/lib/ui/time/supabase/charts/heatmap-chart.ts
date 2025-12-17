@@ -1,12 +1,6 @@
 import type { GridConfig, HeatMapChartConfig, HeatMapSeriesData } from "$lib/services/metrics/metrics-types";
 
-export function heatmap(
-  categories: Set<string>,
-  yAxisData: string[],
-  series: HeatMapSeriesData,
-  bgPatternImg: HTMLImageElement,
-  chartTitleString: string
-): HeatMapChartConfig {
+export function heatmap(categories: Set<string>, yAxisData: string[], series: HeatMapSeriesData, bgPatternImg: HTMLImageElement, chartTitleString: string): HeatMapChartConfig {
   const numCategories = categories.size;
   const numRows = yAxisData.length;
 
@@ -76,7 +70,7 @@ export function heatmap(
         splitArea: { show: true },
         axisLabel: {
           interval: 0,
-          fontSize: 13,
+          fontSize: 10,
           rotate: 90,
           align: "right",
           verticalAlign: "middle",
