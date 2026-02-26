@@ -1,23 +1,48 @@
 <script lang="ts">
   import "../app.css";
-  import { tutorsConnectService } from "$lib/services/connect";
-  import type { PageData } from "./$types";
-  import { browser } from "$app/environment";
-  import { themeService } from "$lib/services/themes/services/themes.svelte";
+  import { AppBar } from "@skeletonlabs/skeleton-svelte";
+  import { goto } from "$app/navigation";
+  import CourseCard from "$lib/components/CourseCard.svelte";
+  import StudentCard from "$lib/components/StudentCard.svelte";
 
-  interface Props {
-    data: PageData;
-    children: import("svelte").Snippet;
-  }
-  let { data, children }: Props = $props();
+  let { children, data } = $props();
 
-  if (data?.user) {
-    tutorsConnectService.reconnect(data.user);
-  }
-
-  if (browser) {
-    themeService.initDisplay();
-  }
+  const title = $derived(data.courseTitle ?? "Tutors Time");
+  const subtitle = $derived(data.viewType ?? "");
 </script>
 
-{@render children()}
+<AppBar>
+  <AppBar.Toolbar class="grid-cols-[1fr_2fr_1fr] h-16 min-h-16">
+    <AppBar.Lead class="justify-start">
+
+      <CourseCard
+      {title}
+      subtitle={subtitle || null}
+      courseIcon={data.courseIcon ?? null}
+      courseImg={data.courseImg ?? null}
+    />
+    </AppBar.Lead>
+    <AppBar.Headline class="h-full min-w-0">
+
+    </AppBar.Headline>
+    <AppBar.Trail class="justify-end">
+      {#if data.studentName}
+        <StudentCard fullName={data.studentName} avatarUrl={data.avatarUrl} compact />
+      {/if}
+      {#if data.courseId}
+      <button
+        type="button"
+        class="btn preset-outlined text-center leading-tight"
+        onclick={() => goto("/")}
+        aria-label="Change course"
+      >
+        Change<br />Course
+      </button>
+    {/if}
+    </AppBar.Trail>
+  </AppBar.Toolbar>
+</AppBar>
+
+<main>
+  {@render children()}
+</main>
