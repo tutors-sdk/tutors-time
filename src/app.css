@@ -4,12 +4,58 @@
 @import '@skeletonlabs/skeleton-svelte';
 
 @import "@skeletonlabs/skeleton";
-@import "@skeletonlabs/skeleton/themes/cerberus";
-@import "@skeletonlabs/skeleton/themes/terminus";
-@import "@skeletonlabs/skeleton/themes/rose";
-@import "./lib/services/themes/styles/tutors.css";
-@import "./lib/services/themes/styles/classic.css";
-@import "./lib/services/themes/styles/dyslexia.css";
-@import "./lib/services/themes/styles/easter.css";
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* AG Grid Community – Visual tab course usage grid */
+@import "ag-grid-community/styles/ag-grid.css";
+@import "ag-grid-community/styles/ag-theme-quartz.css";
+
+/* Grid fills container (full viewport width/height when parent is viewport-sized) */
+.grid-fill-container {
+  height: 100%;
+  width: 100%;
+}
+
+/* Visual tab content: full viewport width and height so the grid fills the view */
+.visual-tab-viewport {
+  width: 100%;
+  height: calc(100vh - 12rem);
+  min-height: 320px;
+}
+
+/* Summary tab content: full viewport width and height so the summary grid fills the view */
+.summary-tab-viewport {
+  width: 100%;
+  height: calc(100vh - 12rem);
+  min-height: 320px;
+}
+
+/* Heatmap full viewport width – override Heat.js default max-width */
+.heatmap-full-width .heat-js,
+.heatmap-full-width [data-heat-js] .heat-js {
+  max-width: none !important;
+  width: 100% !important;
+}
+
+/* Column headers: slightly smaller font */
+.ag-theme-quartz .ag-header-cell-text {
+  font-size: 0.8rem;
+}
+
+/* Time cells (Total + date columns): slightly smaller font */
+.ag-theme-quartz .ag-cell.ag-right-aligned-cell {
+  font-size: 0.8rem;
+}
+
+/* Vertical column headers (AG Grid) – save horizontal space */
+.ag-theme-quartz .ag-header-vertical .ag-header-cell-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.ag-theme-quartz .ag-header-vertical .ag-header-cell-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+  line-height: 1.2;
+}
