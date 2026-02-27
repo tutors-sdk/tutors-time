@@ -42,7 +42,8 @@
     "@skeletonlabs/tw-plugin": "^0.4.1",
     "@supabase/supabase-js": "^2.94.0",
     "ag-grid-community": "^35.0.1",
-    "jheat.js": "^5.0.0"
+    "jheat.js": "^5.0.0",
+    "@tutors/tutors-time-lib": "npm:@jsr/tutors__tutors-time-lib@^5.0.1"
   },
   "type": "module"
 }
