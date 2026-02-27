@@ -2,9 +2,7 @@
   import { createGrid, ModuleRegistry, AllCommunityModule } from "ag-grid-community";
   import type { GridApi } from "ag-grid-community";
   import { GridLabModel } from "$lib/components/labs/GridLabModel";
-  import type { LabRow, LabMedianRow } from "$lib/tutors-time-service/types";
-  import type { LabViewMode } from "$lib/tutors-time-service/utils";
-  import type { TutorsTimeCourse } from "$lib/tutors-time-service/types";
+  import type { LabRow, LabMedianRow, LabViewMode, TutorsTimeCourse } from "@tutors/tutors-time-lib";
 
   ModuleRegistry.registerModules([AllCommunityModule]);
 

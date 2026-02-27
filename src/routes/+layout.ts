@@ -1,5 +1,5 @@
 import type { LayoutLoad } from "./$types";
-import { TutorsTime } from "$lib/tutors-time-service";
+import { TutorsTime } from "@tutors/tutors-time-lib";
 
 /** Derive a human-readable view type from the current pathname. */
 function getViewType(pathname: string): string {

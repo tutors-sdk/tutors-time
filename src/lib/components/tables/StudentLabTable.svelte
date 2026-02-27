@@ -1,7 +1,6 @@
 <script lang="ts">
-  import type { LabRow, LabMedianRow } from "$lib/tutors-time-service/types";
-  import { extractLabIdentifier } from "$lib/tutors-time-service/utils";
-  import { formatTimeMinutesOnly, cellColorForMinutes } from "$lib/tutors-time-service/utils";
+  import type { LabRow, LabMedianRow } from "@tutors/tutors-time-lib";
+  import { extractLabIdentifier, formatTimeMinutesOnly, cellColorForMinutes } from "@tutors/tutors-time-lib";
 
   interface Props {
     courseid: string;

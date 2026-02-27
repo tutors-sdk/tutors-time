@@ -1,6 +1,6 @@
 <script lang="ts">
   import CalendarGrid from "$lib/components/calendar/CalendarGrid.svelte";
-  import type { TutorsTimeCourse } from "$lib/tutors-time-service/types";
+  import type { TutorsTimeCourse } from "@tutors/tutors-time-lib";
 
   interface Props {
     data: { course: TutorsTimeCourse | null };

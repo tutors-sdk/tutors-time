@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { TutorsTimeStudent } from "$lib/tutors-time-service/types";
+  import type { TutorsTimeStudent } from "@tutors/tutors-time-lib";
   import PinDialog from "$lib/components/PinDialog.svelte";
   import CalendarHeatmap from "$lib/components/calendar/CalendarHeatmap.svelte";
   import StudentCalendarTable from "$lib/components/tables/StudentCalendarTable.svelte";

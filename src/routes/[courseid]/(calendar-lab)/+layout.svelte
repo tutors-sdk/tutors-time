@@ -1,6 +1,6 @@
 <script lang="ts">
   import PinDialog from "$lib/components/PinDialog.svelte";
-  import type { TutorsTimeCourse } from "$lib/tutors-time-service/types";
+  import type { TutorsTimeCourse } from "@tutors/tutors-time-lib";
 
   interface Props {
     data: { course: TutorsTimeCourse | null };

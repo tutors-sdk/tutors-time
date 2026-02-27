@@ -2,7 +2,7 @@
   import { createGrid, ModuleRegistry, AllCommunityModule } from "ag-grid-community";
   import type { GridApi } from "ag-grid-community";
   import { GridCalendarModel } from "$lib/components/calendar/GridCalendarModel";
-  import type { CalendarMedianRow, TutorsTimeCourse } from "$lib/tutors-time-service/types";
+  import type { CalendarMedianRow, TutorsTimeCourse } from "@tutors/tutors-time-lib";
 
   ModuleRegistry.registerModules([AllCommunityModule]);
 

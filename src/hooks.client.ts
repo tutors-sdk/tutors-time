@@ -7,7 +7,7 @@ import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from "$env/static/publi
   key: PUBLIC_SUPABASE_ANON_KEY
 };
 
-import { initSupabase } from "$lib/tutors-time-service";
+import { initSupabase } from "@tutors/tutors-time-lib";
 
 // Run before any load functions. Hooks modules load at app startup.
 initSupabase(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY);

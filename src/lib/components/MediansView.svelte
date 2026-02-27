@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type { TutorsTimeCourse } from "$lib/tutors-time-service/types";
-  import { BaseLabModel } from "$lib/tutors-time-service/services/base-lab-model";
+  import type { TutorsTimeCourse } from "@tutors/tutors-time-lib";
+  import { BaseLabModel } from "@tutors/tutors-time-lib";
   import {
     formatDateShort,
     formatTimeMinutesOnly,
     cellColorForMinutes,
     extractLabIdentifier,
     extractStepName
-  } from "$lib/tutors-time-service/utils";
+  } from "@tutors/tutors-time-lib";
   import CalendarHeatmap from "$lib/components/calendar/CalendarHeatmap.svelte";
 
   interface Props {
