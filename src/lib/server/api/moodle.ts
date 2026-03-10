@@ -126,6 +126,8 @@ export interface MoodleAssignSubmission {
   assignment?: number;
   latest?: number;
   plugins?: MoodleAssignSubmissionPlugin[];
+  gradingstatus?: string;
+  timestarted?: number;
 }
 
 export interface MoodleAssignSubmissionsByAssignment {
@@ -186,14 +188,43 @@ async function callMoodle<T>(wsFunction: string, params?: MoodleParams): Promise
   return payload as T;
 }
 
-export async function getCourseContents(courseId: number): Promise<MoodleCourseSection[]> {
+export interface CourseContentsOptions {
+  excludemodules?: boolean;
+  excludecontents?: boolean;
+  includestealthmodules?: boolean;
+  sectionid?: number;
+  sectionnum?: number;
+  modname?: string;
+}
+
+export async function getCourseContents(
+  courseId: number,
+  options?: CourseContentsOptions
+): Promise<MoodleCourseSection[]> {
   if (!Number.isInteger(courseId) || courseId <= 0) {
     throw new Error(`Invalid Moodle courseId: ${courseId}`);
   }
 
-  return callMoodle<MoodleCourseSection[]>("core_course_get_contents", {
-    courseid: courseId
-  });
+  const params: MoodleParams = { courseid: courseId };
+
+  if (options) {
+    const optionEntries: Array<[string, MoodleScalar | undefined]> = [
+      ["excludemodules", options.excludemodules !== undefined ? Number(options.excludemodules) : undefined],
+      ["excludecontents", options.excludecontents !== undefined ? Number(options.excludecontents) : undefined],
+      ["includestealthmodules", options.includestealthmodules !== undefined ? Number(options.includestealthmodules) : undefined],
+      ["sectionid", options.sectionid],
+      ["sectionnum", options.sectionnum],
+      ["modname", options.modname]
+    ];
+
+    optionEntries.forEach(([name, value], index) => {
+      if (value === undefined) return;
+      params[`options[${index}][name]`] = name;
+      params[`options[${index}][value]`] = value;
+    });
+  }
+
+  return callMoodle<MoodleCourseSection[]>("core_course_get_contents", params);
 }
 
 export async function getAssignmentSubmissions(
