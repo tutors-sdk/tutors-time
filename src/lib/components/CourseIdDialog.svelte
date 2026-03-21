@@ -17,6 +17,8 @@
       courseId: string;
       startDate: string | null;
       endDate: string | null;
+      moodleCourseId: string | null;
+      moodleSectionId: string | null;
     };
     close: void;
     open: { open: boolean };
@@ -29,6 +31,8 @@
   let courseIdsInput = $state("");
   let startDateInput = $state('');
   let endDateInput = $state('');
+  let moodleCourseIdInput = $state('');
+  let moodleSectionIdInput = $state('');
   let dateRangeError = $state<string | null>(null);
   let dialogElement: HTMLDialogElement | undefined;
 
@@ -106,7 +110,17 @@
     }
 
     dateRangeError = null;
-    dispatch("submit", { courseId, startDate, endDate });
+
+    const moodleCourseId = moodleCourseIdInput.trim() || null;
+    const moodleSectionId = moodleSectionIdInput.trim() || null;
+
+    dispatch("submit", {
+      courseId,
+      startDate,
+      endDate,
+      moodleCourseId,
+      moodleSectionId
+    });
   }
 
   function handleClose() {
@@ -162,6 +176,28 @@
       {#if dateRangeError}
         <p class="text-sm text-error-500">{dateRangeError}</p>
       {/if}
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div>
+          <label for="moodle-course-id-input" class="label">Moodle Course ID (optional)</label>
+          <input
+            id="moodle-course-id-input"
+            type="text"
+            bind:value={moodleCourseIdInput}
+            placeholder="e.g. 1234"
+            class="input"
+          />
+        </div>
+        <div>
+          <label for="moodle-section-id-input" class="label">Moodle Section ID (optional)</label>
+          <input
+            id="moodle-section-id-input"
+            type="text"
+            bind:value={moodleSectionIdInput}
+            placeholder="e.g. 5678"
+            class="input"
+          />
+        </div>
+      </div>
       <div class="flex justify-end gap-2">
         <button
           type="button"

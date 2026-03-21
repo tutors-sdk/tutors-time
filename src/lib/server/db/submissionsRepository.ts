@@ -51,8 +51,8 @@ export async function upsertAssignments(
 
 export interface SubmissionRow {
   id: number;
-  assignment_id: number;
-  external_user_id: number;
+  assignmentId: number;
+  external_userid: number;
   attempt_no: number;
   status: string;
   timecreated: string | null;
@@ -68,8 +68,8 @@ function toSubmissionRow(
 ): SubmissionRow {
   return {
     id: submission.id,
-    assignment_id: assignmentId,
-    external_user_id: submission.userid,
+    assignmentId: assignmentId,
+    external_userid: submission.userid,
     attempt_no: submission.attemptnumber ?? 0,
     status: submission.status ?? "",
     timecreated: toTimestamp(submission?.timecreated),

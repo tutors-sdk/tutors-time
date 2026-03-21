@@ -240,7 +240,7 @@ export async function getAssignmentSubmissions(
     if (!Number.isInteger(id) || id <= 0) {
       throw new Error(`Invalid Moodle assignment id: ${id}`);
     }
-    params[`assignids[${index}]`] = id;
+    params[`assignmentids[${index}]`] = id;
   });
 
   if (options?.status) params.status = options.status;
