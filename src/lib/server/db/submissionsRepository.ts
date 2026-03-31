@@ -9,6 +9,7 @@ export interface AssignmentRow {
   url: string | null;
   due_date: string | null;
   opened_date: string | null;
+  last_synced_at: string;
 }
 
 function toTimestamp(unix: number | undefined): string | null {
@@ -26,7 +27,8 @@ function toAssignmentRow(module: MoodleModule, courseId: string): AssignmentRow 
     name: module.name ?? null,
     url: module.url ?? null,
     due_date: toTimestamp(dueDate?.timestamp),
-    opened_date: toTimestamp(openedDate?.timestamp)
+    opened_date: toTimestamp(openedDate?.timestamp),
+    last_synced_at: new Date().toISOString()
   };
 }
 
@@ -59,6 +61,7 @@ export interface SubmissionRow {
   timemodified: string | null;
   timestarted: string | null;
   grading_status: string;
+  last_synced_at: string;
 }
 
 function toSubmissionRow(
@@ -76,11 +79,25 @@ function toSubmissionRow(
     timemodified: toTimestamp(submission?.timemodified),
     timestarted: toTimestamp(submission?.timestarted),
     grading_status: submission.gradingstatus ?? "",
+    last_synced_at: new Date().toISOString()
   };
 }
 
 function getClient() {
   return createClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY);
+}
+
+export async function getLastSyncedAt(courseId: string): Promise<string | null> {
+  const { data, error } = await getClient()
+    .from("assignments")
+    .select("last_synced_at")
+    .eq("courseid", courseId)
+    .order("last_synced_at", { ascending: false })
+    .limit(1)
+    .single();
+
+  if (error || !data) return null;
+  return data.last_synced_at;
 }
 
 export async function upsertSubmissions(
