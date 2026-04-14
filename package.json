@@ -43,7 +43,7 @@
     "@supabase/supabase-js": "^2.103.0",
     "ag-grid-community": "^35.2.1",
     "jheat.js": "^5.1.0",
-    "@tutors/tutors-time-lib": "npm:@jsr/tutors__tutors-time-lib@^5.0.1"
+    "@tutors/tutors-time-lib": "npm:@jsr/tutors__tutors-time-lib@^5.0.2"
   },
   "type": "module"
 }

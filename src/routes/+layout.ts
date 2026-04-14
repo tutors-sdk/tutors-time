@@ -46,6 +46,8 @@ export const load: LayoutLoad = async ({ url }) => {
 
   let studentName: string | null = null;
   let avatarUrl: string | null = null;
+  let sentiment: string | null = "neutral";
+  let onlineStatus: string | null = "online";
   const isStudentRoute =
     segments.length === 2 &&
     segments[1] !== "calendar" &&
@@ -55,8 +57,10 @@ export const load: LayoutLoad = async ({ url }) => {
     const studentId = segments[1] ?? "";
     try {
       const info = await TutorsTime.getStudentDisplayInfo(studentId);
-      studentName = info.studentName;
-      avatarUrl = info.avatarUrl;
+      studentName = info.full_name;
+      avatarUrl = info.avatar_url;
+      sentiment = info.sentiment;
+      onlineStatus = info.online_status;
     } catch {
       studentName = studentId;
     }
@@ -69,6 +73,8 @@ export const load: LayoutLoad = async ({ url }) => {
     viewType: viewType || null,
     courseId: courseId.trim() || null,
     studentName,
-    avatarUrl
+    avatarUrl,
+    sentiment,
+    onlineStatus
   };
 };

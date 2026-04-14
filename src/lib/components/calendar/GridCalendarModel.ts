@@ -1,4 +1,4 @@
-import type { ColDef } from "ag-grid-community";
+import type { ColDef, ICellRendererParams } from "ag-grid-community";
 import type { CalendarModel, CalendarRow, CalendarMedianRow, ViewMode } from "@tutors/tutors-time-lib";
 import {
   formatDateShort,
@@ -139,7 +139,7 @@ export class GridCalendarModel {
         flex: 1,
         pinned: "left",
         cellStyle: { paddingLeft: "4px" },
-        cellRenderer: (params) => {
+        cellRenderer: (params: ICellRendererParams<CalendarRow, string>) => {
           const name = String(params.value ?? "");
           const studentId = String(params.data?.studentid ?? "");
           const courseId = String(params.data?.courseid ?? "");
@@ -148,12 +148,24 @@ export class GridCalendarModel {
         }
       },
       {
+        field: "online_status",
+        headerName: "Online",
+        minWidth: 88,
+        maxWidth: 120,
+        pinned: "left",
+        cellStyle: { paddingLeft: "4px" },
+        valueFormatter: (p) => {
+          const v = p.value;
+          return v != null && String(v).trim() !== "" ? String(v) : "";
+        }
+      },
+      {
         field: "studentid",
         headerName: "Github",
         minWidth: 120,
         pinned: "left",
         cellStyle: { paddingLeft: "4px" },
-        cellRenderer: (params) => {
+        cellRenderer: (params: ICellRendererParams<CalendarRow, string>) => {
           const studentId = String(params.value ?? "");
           if (!studentId) return studentId;
           return `<a href="https://github.com/${studentId}" target="_blank" rel="noopener noreferrer" class="underline text-primary-600">${studentId}</a>`;
