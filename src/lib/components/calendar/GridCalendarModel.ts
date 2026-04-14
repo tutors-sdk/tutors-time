@@ -5,6 +5,7 @@ import {
   formatTimeMinutesOnly,
   cellColorForMinutes
 } from "@tutors/tutors-time-lib";
+import { SentimentCellRenderer } from "$lib/components/calendar/SentimentCellRenderer";
 
 /** Grid-ready calendar table with ColDef-typed columns for ag-grid. */
 export type GridCalendarTable = {
@@ -158,6 +159,19 @@ export class GridCalendarModel {
           const v = p.value;
           return v != null && String(v).trim() !== "" ? String(v) : "";
         }
+      },
+      {
+        colId: "sentiment",
+        field: "sentiment",
+        headerName: "Mood",
+        minWidth: 44,
+        maxWidth: 56,
+        width: 52,
+        pinned: "left",
+        sortable: false,
+        suppressHeaderMenuButton: true,
+        cellStyle: { paddingLeft: "2px", paddingRight: "2px" },
+        cellRenderer: SentimentCellRenderer
       },
       {
         field: "studentid",

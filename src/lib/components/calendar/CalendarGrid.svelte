@@ -69,12 +69,16 @@
               courseid: "",
               studentid: "",
               full_name: "",
-              totalSeconds: 0
+              totalSeconds: 0,
+              online_status: "",
+              sentiment: ""
             };
             const combined: CalendarRow = {
               ...medianRow,
               studentid: "",
-              full_name: "Course median"
+              full_name: "Course median",
+              online_status: "",
+              sentiment: ""
             };
             return [...rows, blankRow, combined];
           })()

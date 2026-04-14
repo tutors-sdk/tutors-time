@@ -1,7 +1,7 @@
 import type { LayoutLoad } from "./$types";
 import { initSupabase, TutorsTime } from "@tutors/tutors-time-lib";
 import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from "$env/static/public";
-import { enrichCalendarRowsWithOnlineStatus } from "$lib/calendar/enrichCalendarOnlineStatus";
+import { enrichCalendarRowsWithUserFields } from "$lib/enrichCalendarUserFields";
 
 export const load: LayoutLoad = async ({ params }) => {
   initSupabase(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY);
@@ -10,6 +10,6 @@ export const load: LayoutLoad = async ({ params }) => {
     return { course: null };
   }
   const course = await TutorsTime.loadCourseTime(courseId);
-  await enrichCalendarRowsWithOnlineStatus(course);
+  await enrichCalendarRowsWithUserFields(course);
   return { course };
 };
