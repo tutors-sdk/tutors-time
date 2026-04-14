@@ -5,6 +5,7 @@ import {
   formatTimeMinutesOnly,
   cellColorForMinutes
 } from "@tutors/tutors-time-lib";
+import { OnlineCellRenderer } from "$lib/components/calendar/OnlineCellRenderer";
 import { SentimentCellRenderer } from "$lib/components/calendar/SentimentCellRenderer";
 
 /** Grid-ready calendar table with ColDef-typed columns for ag-grid. */
@@ -151,14 +152,12 @@ export class GridCalendarModel {
       {
         field: "online_status",
         headerName: "Online",
-        minWidth: 88,
-        maxWidth: 120,
+        minWidth: 44,
+        maxWidth: 56,
+        width: 52,
         pinned: "left",
-        cellStyle: { paddingLeft: "4px" },
-        valueFormatter: (p) => {
-          const v = p.value;
-          return v != null && String(v).trim() !== "" ? String(v) : "";
-        }
+        cellStyle: { paddingLeft: "2px", paddingRight: "2px" },
+        cellRenderer: OnlineCellRenderer
       },
       {
         colId: "sentiment",
