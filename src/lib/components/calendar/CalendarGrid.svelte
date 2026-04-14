@@ -118,6 +118,7 @@
       domLayout: "normal",
       suppressNoRowsOverlay: false,
       headerHeight: 72,
+      rowHeight: 32,
       enableCellTextSelection: true,
       ensureDomOrder: true
     });
