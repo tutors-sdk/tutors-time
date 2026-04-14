@@ -41,11 +41,19 @@
       if (includeMedianRow && mode === "lab") {
         const medianRow = gridModel.medianByLab.row;
         if (medianRow) {
-          const blankRow: LabRow = { studentid: "", full_name: "", totalMinutes: 0 };
+          const blankRow: LabRow = {
+            studentid: "",
+            full_name: "",
+            totalMinutes: 0,
+            online_status: "",
+            sentiment: ""
+          };
           const combined: LabRow = {
             ...medianRow,
             studentid: "Course median",
-            full_name: "Course median"
+            full_name: "Course median",
+            online_status: "",
+            sentiment: ""
           };
           result = [...result, blankRow, combined];
         }
@@ -65,6 +73,7 @@
       domLayout: "normal",
       suppressNoRowsOverlay: false,
       headerHeight: 170,
+      rowHeight: 32,
       enableCellTextSelection: true,
       ensureDomOrder: true
     });

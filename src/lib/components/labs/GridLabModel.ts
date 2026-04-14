@@ -7,6 +7,8 @@ import {
   extractLabIdentifier,
   extractStepName
 } from "@tutors/tutors-time-lib";
+import { OnlineCellRenderer } from "$lib/components/calendar/OnlineCellRenderer";
+import { SentimentCellRenderer } from "$lib/components/calendar/SentimentCellRenderer";
 
 /** Header mode: "lab" = book segment, "step" = step name (last segment), "raw" = full id. */
 type LabColumnHeaderMode = "lab" | "step" | "raw";
@@ -118,6 +120,31 @@ export class GridLabModel {
           if (!studentId || !courseId) return name;
           return `<a href="/${courseId}/${studentId}" class="underline text-primary-600">${name}</a>`;
         }
+      },
+      {
+        field: "online_status",
+        headerName: "Online",
+        headerClass: "ag-header-vertical",
+        minWidth: 44,
+        maxWidth: 56,
+        width: 52,
+        pinned: "left",
+        cellStyle: { paddingLeft: "2px", paddingRight: "2px" },
+        cellRenderer: OnlineCellRenderer
+      },
+      {
+        colId: "sentiment",
+        field: "sentiment",
+        headerName: "Mood",
+        headerClass: "ag-header-vertical",
+        minWidth: 44,
+        maxWidth: 56,
+        width: 52,
+        pinned: "left",
+        sortable: false,
+        suppressHeaderMenuButton: true,
+        cellStyle: { paddingLeft: "2px", paddingRight: "2px" },
+        cellRenderer: SentimentCellRenderer
       },
       {
         field: "studentid",

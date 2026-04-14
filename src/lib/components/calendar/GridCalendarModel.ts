@@ -152,6 +152,7 @@ export class GridCalendarModel {
       {
         field: "online_status",
         headerName: "Online",
+        headerClass: "ag-header-vertical",
         minWidth: 44,
         maxWidth: 56,
         width: 52,
@@ -163,6 +164,7 @@ export class GridCalendarModel {
         colId: "sentiment",
         field: "sentiment",
         headerName: "Mood",
+        headerClass: "ag-header-vertical",
         minWidth: 44,
         maxWidth: 56,
         width: 52,
