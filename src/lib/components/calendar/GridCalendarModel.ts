@@ -7,6 +7,7 @@ import {
 } from "@tutors/tutors-time-lib";
 import { OnlineCellRenderer } from "$lib/components/calendar/OnlineCellRenderer";
 import { SentimentCellRenderer } from "$lib/components/calendar/SentimentCellRenderer";
+import { StudentAvatarCellRenderer } from "$lib/components/calendar/StudentAvatarCellRenderer";
 
 /** Grid-ready calendar table with ColDef-typed columns for ag-grid. */
 export type GridCalendarTable = {
@@ -148,6 +149,19 @@ export class GridCalendarModel {
           if (!studentId || !courseId) return name;
           return `<a href="/${courseId}/${studentId}" class="underline text-primary-600">${name}</a>`;
         }
+      },
+      {
+        colId: "avatar",
+        field: "avatar_url",
+        headerName: "",
+        minWidth: 40,
+        maxWidth: 48,
+        width: 44,
+        pinned: "left",
+        sortable: false,
+        suppressHeaderMenuButton: true,
+        cellStyle: { paddingLeft: "4px", paddingRight: "4px" },
+        cellRenderer: StudentAvatarCellRenderer
       },
       {
         field: "online_status",

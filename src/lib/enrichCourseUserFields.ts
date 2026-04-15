@@ -2,7 +2,7 @@ import { getSupabase } from "@tutors/tutors-time-lib";
 import type { TutorsTimeCourse } from "@tutors/tutors-time-lib";
 import type { ConnectUserFieldsRow } from "$lib/connectUserFieldsRow";
 
-type UserFields = { online_status: string; sentiment: string };
+type UserFields = { online_status: string; sentiment: string; avatar_url: string };
 
 function applyUserFields(fieldsByGithub: Map<string, UserFields>, rows: ConnectUserFieldsRow[]): void {
   for (const r of rows) {
@@ -10,16 +10,18 @@ function applyUserFields(fieldsByGithub: Map<string, UserFields>, rows: ConnectU
     if (!id) {
       r.online_status = "";
       r.sentiment = "";
+      r.avatar_url = "";
       continue;
     }
     const f = fieldsByGithub.get(id);
     r.online_status = f?.online_status ?? "";
     r.sentiment = f?.sentiment ?? "";
+    r.avatar_url = f?.avatar_url ?? "";
   }
 }
 
 /**
- * Fetches `online_status` and `sentiment` from tutors-connect-users for all students
+ * Fetches `online_status`, `sentiment`, and `avatar_url` from tutors-connect-users for all students
  * in calendar and lab views, and attaches them to day/week and lab/step rows.
  */
 export async function enrichCourseUserFields(course: TutorsTimeCourse | null): Promise<void> {
@@ -47,7 +49,7 @@ export async function enrichCourseUserFields(course: TutorsTimeCourse | null): P
   const supabase = getSupabase();
   const { data, error } = await supabase
     .from("tutors-connect-users")
-    .select("github_id, online_status, sentiment")
+    .select("github_id, online_status, sentiment, avatar_url")
     .in("github_id", [...ids]);
 
   if (error) {
@@ -61,9 +63,11 @@ export async function enrichCourseUserFields(course: TutorsTimeCourse | null): P
     if (!gh) continue;
     const st = (row as { online_status?: string | null }).online_status;
     const sent = (row as { sentiment?: string | null }).sentiment;
+    const av = (row as { avatar_url?: string | null }).avatar_url;
     fieldsByGithub.set(gh, {
       online_status: st != null && String(st).trim() !== "" ? String(st) : "",
-      sentiment: sent != null && String(sent).trim() !== "" ? String(sent).trim() : ""
+      sentiment: sent != null && String(sent).trim() !== "" ? String(sent).trim() : "",
+      avatar_url: av != null && String(av).trim() !== "" ? String(av).trim() : ""
     });
   }
 

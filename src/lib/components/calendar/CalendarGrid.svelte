@@ -71,14 +71,16 @@
               full_name: "",
               totalSeconds: 0,
               online_status: "",
-              sentiment: ""
+              sentiment: "",
+              avatar_url: ""
             };
             const combined: CalendarRow = {
               ...medianRow,
               studentid: "",
               full_name: "Course median",
               online_status: "",
-              sentiment: ""
+              sentiment: "",
+              avatar_url: ""
             };
             return [...rows, blankRow, combined];
           })()
@@ -118,7 +120,7 @@
       domLayout: "normal",
       suppressNoRowsOverlay: false,
       headerHeight: 72,
-      rowHeight: 32,
+      rowHeight: 36,
       enableCellTextSelection: true,
       ensureDomOrder: true
     });
