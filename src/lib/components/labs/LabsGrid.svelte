@@ -46,14 +46,16 @@
             full_name: "",
             totalMinutes: 0,
             online_status: "",
-            sentiment: ""
+            sentiment: "",
+            avatar_url: ""
           };
           const combined: LabRow = {
             ...medianRow,
             studentid: "Course median",
             full_name: "Course median",
             online_status: "",
-            sentiment: ""
+            sentiment: "",
+            avatar_url: ""
           };
           result = [...result, blankRow, combined];
         }

@@ -165,7 +165,7 @@ export class GridCalendarModel {
       },
       {
         field: "online_status",
-        headerName: "Online",
+        headerName: "Share",
         headerClass: "ag-header-vertical",
         minWidth: 44,
         maxWidth: 56,
@@ -192,6 +192,8 @@ export class GridCalendarModel {
         field: "studentid",
         headerName: "Github",
         minWidth: 120,
+        maxWidth: 112,
+        width: 96,
         pinned: "left",
         cellStyle: { paddingLeft: "4px" },
         cellRenderer: (params: ICellRendererParams<CalendarRow, string>) => {

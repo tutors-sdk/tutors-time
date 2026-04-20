@@ -9,6 +9,7 @@ import {
 } from "@tutors/tutors-time-lib";
 import { OnlineCellRenderer } from "$lib/components/calendar/OnlineCellRenderer";
 import { SentimentCellRenderer } from "$lib/components/calendar/SentimentCellRenderer";
+import { StudentAvatarCellRenderer } from "$lib/components/calendar/StudentAvatarCellRenderer";
 
 /** Header mode: "lab" = book segment, "step" = step name (last segment), "raw" = full id. */
 type LabColumnHeaderMode = "lab" | "step" | "raw";
@@ -122,8 +123,21 @@ export class GridLabModel {
         }
       },
       {
+        colId: "avatar",
+        field: "avatar_url",
+        headerName: "",
+        minWidth: 40,
+        maxWidth: 48,
+        width: 44,
+        pinned: "left",
+        sortable: false,
+        suppressHeaderMenuButton: true,
+        cellStyle: { paddingLeft: "4px", paddingRight: "4px" },
+        cellRenderer: StudentAvatarCellRenderer
+      },
+      {
         field: "online_status",
-        headerName: "Online",
+        headerName: "Share",
         headerClass: "ag-header-vertical",
         minWidth: 44,
         maxWidth: 56,
@@ -150,6 +164,8 @@ export class GridLabModel {
         field: "studentid",
         headerName: "Github",
         minWidth: 120,
+        maxWidth: 112,
+        width: 96,
         pinned: "left",
         cellStyle: { paddingLeft: "4px" },
         cellRenderer: (params: ICellRendererParams<LabRow>) => {
