@@ -69,12 +69,18 @@
               courseid: "",
               studentid: "",
               full_name: "",
-              totalSeconds: 0
+              totalSeconds: 0,
+              online_status: "",
+              sentiment: "",
+              avatar_url: ""
             };
             const combined: CalendarRow = {
               ...medianRow,
               studentid: "",
-              full_name: "Course median"
+              full_name: "Course median",
+              online_status: "",
+              sentiment: "",
+              avatar_url: ""
             };
             return [...rows, blankRow, combined];
           })()
@@ -114,6 +120,7 @@
       domLayout: "normal",
       suppressNoRowsOverlay: false,
       headerHeight: 72,
+      rowHeight: 36,
       enableCellTextSelection: true,
       ensureDomOrder: true
     });

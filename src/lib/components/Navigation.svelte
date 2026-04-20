@@ -46,6 +46,11 @@
       label: "Learning Records",
       href: `${labPath}/learning-records`,
       icon: "glyphs-poly:grid-1"
+    },
+    {
+      label: "Assignments",
+      href: `/${courseId}/assignments`,
+      icon: "streamline-ultimate-color:task-list-pen"
     }
   ]);
 </script>

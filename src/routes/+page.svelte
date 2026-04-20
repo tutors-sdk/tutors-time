@@ -8,11 +8,28 @@
   let dialogError = $state<string | null>(null);
   let courseIdForDialog = $state<string | null>(null);
 
-  async function handleLoadCourse(courseId: string, startDate: string | null, endDate: string | null) {
+  async function handleLoadCourse(
+    courseId: string,
+    startDate: string | null,
+    endDate: string | null,
+    moodleCourseId: string | null,
+    moodleSectionId: string | null
+  ) {
     dialogError = null;
     dialogLoading = true;
     try {
       await TutorsTime.loadCourseTime(courseId, startDate, endDate);
+      console.log("Load Dialog@");
+
+      
+      if (moodleCourseId) {
+        await fetch("/api/sync", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ courseId, moodleCourseId, moodleSectionId })
+        });
+      }
+
       dialogOpen = false;
       goto(`/${courseId}/medians`);
     } catch (e) {
@@ -23,9 +40,16 @@
   }
 
   function handleCourseIdSubmit(
-    event: CustomEvent<{ courseId: string; startDate: string | null; endDate: string | null }>
+    event: CustomEvent<{
+      courseId: string;
+      startDate: string | null;
+      endDate: string | null;
+      moodleCourseId: string | null;
+      moodleSectionId: string | null;
+    }>
   ) {
-    handleLoadCourse(event.detail.courseId, event.detail.startDate, event.detail.endDate);
+    const { courseId, startDate, endDate, moodleCourseId, moodleSectionId } = event.detail;
+    handleLoadCourse(courseId, startDate, endDate, moodleCourseId, moodleSectionId);
   }
 
   function handleDialogClose() {

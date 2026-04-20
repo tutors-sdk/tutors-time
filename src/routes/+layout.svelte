@@ -4,6 +4,8 @@
   import { goto } from "$app/navigation";
   import CourseCard from "$lib/components/CourseCard.svelte";
   import StudentCard from "$lib/components/StudentCard.svelte";
+  import SentimentIcon from "$lib/components/SentimentIcon.svelte";
+  import type { Sentiment } from "$lib/components/SentimentIcon.svelte";
 
   let { children, data } = $props();
 
@@ -27,7 +29,10 @@
     </AppBar.Headline>
     <AppBar.Trail class="justify-end">
       {#if data.studentName}
-        <StudentCard fullName={data.studentName} avatarUrl={data.avatarUrl} compact />
+        <div class="flex items-center gap-8">
+          <SentimentIcon sentiment={data.sentiment as Sentiment} />
+          <StudentCard fullName={data.studentName} avatarUrl={data.avatarUrl} compact />
+        </div>
       {/if}
       {#if data.courseId}
       <button

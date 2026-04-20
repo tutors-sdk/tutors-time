@@ -1,10 +1,13 @@
-import type { ColDef } from "ag-grid-community";
+import type { ColDef, ICellRendererParams } from "ag-grid-community";
 import type { CalendarModel, CalendarRow, CalendarMedianRow, ViewMode } from "@tutors/tutors-time-lib";
 import {
   formatDateShort,
   formatTimeMinutesOnly,
   cellColorForMinutes
 } from "@tutors/tutors-time-lib";
+import { OnlineCellRenderer } from "$lib/components/calendar/OnlineCellRenderer";
+import { SentimentCellRenderer } from "$lib/components/calendar/SentimentCellRenderer";
+import { StudentAvatarCellRenderer } from "$lib/components/calendar/StudentAvatarCellRenderer";
 
 /** Grid-ready calendar table with ColDef-typed columns for ag-grid. */
 export type GridCalendarTable = {
@@ -139,7 +142,7 @@ export class GridCalendarModel {
         flex: 1,
         pinned: "left",
         cellStyle: { paddingLeft: "4px" },
-        cellRenderer: (params) => {
+        cellRenderer: (params: ICellRendererParams<CalendarRow, string>) => {
           const name = String(params.value ?? "");
           const studentId = String(params.data?.studentid ?? "");
           const courseId = String(params.data?.courseid ?? "");
@@ -148,12 +151,52 @@ export class GridCalendarModel {
         }
       },
       {
+        colId: "avatar",
+        field: "avatar_url",
+        headerName: "",
+        minWidth: 40,
+        maxWidth: 48,
+        width: 44,
+        pinned: "left",
+        sortable: false,
+        suppressHeaderMenuButton: true,
+        cellStyle: { paddingLeft: "4px", paddingRight: "4px" },
+        cellRenderer: StudentAvatarCellRenderer
+      },
+      {
+        field: "online_status",
+        headerName: "Share",
+        headerClass: "ag-header-vertical",
+        minWidth: 44,
+        maxWidth: 56,
+        width: 52,
+        pinned: "left",
+        cellStyle: { paddingLeft: "2px", paddingRight: "2px" },
+        cellRenderer: OnlineCellRenderer
+      },
+      {
+        colId: "sentiment",
+        field: "sentiment",
+        headerName: "Mood",
+        headerClass: "ag-header-vertical",
+        minWidth: 44,
+        maxWidth: 56,
+        width: 52,
+        pinned: "left",
+        sortable: false,
+        suppressHeaderMenuButton: true,
+        cellStyle: { paddingLeft: "2px", paddingRight: "2px" },
+        cellRenderer: SentimentCellRenderer
+      },
+      {
         field: "studentid",
         headerName: "Github",
         minWidth: 120,
+        maxWidth: 112,
+        width: 96,
         pinned: "left",
         cellStyle: { paddingLeft: "4px" },
-        cellRenderer: (params) => {
+        cellRenderer: (params: ICellRendererParams<CalendarRow, string>) => {
           const studentId = String(params.value ?? "");
           if (!studentId) return studentId;
           return `<a href="https://github.com/${studentId}" target="_blank" rel="noopener noreferrer" class="underline text-primary-600">${studentId}</a>`;
