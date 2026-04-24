@@ -6,6 +6,7 @@
   import CalendarByDayTable from "$lib/components/tables/CalendarByDayTable.svelte";
   import StudentLabTable from "$lib/components/tables/StudentLabTable.svelte";
   import LabByStepTable from "$lib/components/tables/LabByStepTable.svelte";
+  import AssignmentTable from "$lib/components/tables/AssignmentTable.svelte";
 
   interface Props {
     data: { course: { pin: string } | null; studentCalendar: TutorsTimeStudent };
@@ -110,6 +111,10 @@
             labsByStep={data.studentCalendar.labsByStep}
             medianRow={data.studentCalendar.course?.labsModel?.medianByLabStep?.row ?? null}
             stepColumns={data.studentCalendar.course?.stepColumns ?? []}
+          />
+          <AssignmentTable
+            courseId={data.studentCalendar.courseid}
+            studentId={data.studentCalendar.studentid}
           />
         </div>
       {/if}
